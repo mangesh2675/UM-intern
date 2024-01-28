@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f2cc6c;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #449fb8;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-task {
+    margin-bottom: 25px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    border-radius: 3px;
+}
+
+li input {
+    margin-right: 10px;
+}
+
+/* Add these styles for the new features */
+.due-date {
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+.priority {
+    margin-right: 10px;
+    font-size: 12px;
+    color: #fff;
+    padding: 6px 9px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.priority.low {
+    background-color: #5cb85c;
+}
+
+.priority.medium {
+    background-color: #f0ad4e;
+}
+
+.priority.high {
+    background-color: #d9534f;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+    </style>
+    <link rel="stylesheet" href="styles.css">
+    <title>To-Do List</title>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div class="add-task">
+            <input type="text" id="taskInput" placeholder="Add a new task...">
+            <input type="date" id="dueDate">
+            <select id="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <button onclick="addTask()">Add</button>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+        let taskList = document.getElementById("taskList");
+
+function addTask() {
+    let taskInput = document.getElementById("taskInput");
+    let taskText = taskInput.value.trim();
+    let dueDate = document.getElementById("dueDate").value;
+    let priority = document.getElementById("priority").value;
+
+    if (taskText !== "") {
+        let listItem = document.createElement("li");
+        listItem.innerHTML = `
+            <input type="checkbox" onchange="toggleTask(this)">
+            <span>${taskText}</span>
+            <span class="due-date">${dueDate}</span>
+            <span class="priority">${priority}</span>
+            <button onclick="editTask(this)">Edit</button>
+            <button onclick="deleteTask(this)">Delete</button>
+        `;
+
+        document.getElementById("dueDate").value = "";
+        document.getElementById("priority").value = "low";
+        taskList.appendChild(listItem);
+        taskInput.value = "";
+    }
+}
+
+function toggleTask(checkbox) {
+    let taskText = checkbox.nextElementSibling;
+    taskText.style.textDecoration = checkbox.checked ? "line-through" : "none";
+}
+
+function editTask(button) {
+    let taskText = button.parentElement.querySelector("span");
+    let newText = prompt("Edit task:", taskText.innerText);
+
+    if (newText !== null && newText.trim() !== "") {
+        taskText.innerText = newText.trim();
+    }
+}
+
+function deleteTask(button) {
+    let listItem = button.parentElement;
+    taskList.removeChild(listItem);
+}
+
+    </script>
+    
+</body>
+</html>
