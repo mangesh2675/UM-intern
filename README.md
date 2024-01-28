@@ -1,8 +1,8 @@
 
 
-# Student-Teacher Booking Appointment System
+# Student-Teacher Booking System
 
-The Student-Teacher Booking Appointment System is a web-based application designed to streamline appointment scheduling between students and teachers within an educational institution.
+The Student-Teacher Booking System is a web-based application designed to streamline appointment scheduling between students and teachers within an educational institution.
 
 ## Table of Contents
 
@@ -39,7 +39,7 @@ Before you begin, ensure you have met the following requirements:
 
    ```bash
    git clone https://github.com/yourusername/student-teacher-appointment.git
-   cd student-teacher-appointment
+   cd student-teacher-booking
    
 Build and run the application:
 
